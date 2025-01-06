@@ -22,16 +22,17 @@ pipeline {
                 }
             }
         }
-        // stage('stage 04- stopped and removed old container and run the container of new version') {
-        //     steps {
-        //         sh '''
-        //         # Stop and remove the old container (if it exists)
-        //         docker stop helloworldcontainer || true
-        //         docker rm helloworldcontainer || true
-        //         # run the new container
-        //         docker run -d --name helloworldcontainer -p 8060:8080 amitkumar0441/docker-helloworld:${BUILD_NUMBER}'''
-        //     }
-        // }
+        stage('stage 04- stopped and removed old container and run the container of new version') {
+            steps {
+                sh '''
+                # Stop and remove the old container (if it exists)
+                docker stop helloworldcontainer || true
+                docker rm helloworldcontainer || true
+                # run the new container
+                docker run -d --name helloworldcontainer -p 8060:8080 amitkumar0441/docker-helloworld:${BUILD_NUMBER}'''
+            }
+        }
     }
 }
+
 
