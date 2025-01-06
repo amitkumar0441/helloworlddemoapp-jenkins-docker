@@ -22,6 +22,7 @@ pipeline {
                 }
             }
         }
+       /*
         stage('stage 04- stopped and removed old container and run the container of new version') {
             steps {
                 sh '''
@@ -32,5 +33,6 @@ pipeline {
                 docker run -d --name helloworldcontainer -p 8060:8080 amitkumar0441/docker-helloworld:${BUILD_NUMBER}'''
             }
         }
+        */
     }
 }
