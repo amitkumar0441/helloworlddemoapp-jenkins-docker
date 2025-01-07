@@ -22,17 +22,17 @@ pipeline {
                 }
             }
         }
-        stage('stage 04- deploy on remote server') {
+        stage('stage 04- stopped and removed old container and run the container of new version') {
             steps {
-                sshagent(['remoteserver']) { 
-                    sh """
-                    ssh -o StrictHostKeyChecking=no client@192.168.126.130 \
-                    "docker pull amitkumar0441/docker-helloworld:${BUILD_NUMBER} && \
-                    docker rm -f helloworld-container || true && \
-                    docker run -d --name helloworld-container -p 8050:8080 amitkumar0441/docker-helloworld:${BUILD_NUMBER}"
-                    """
-                }
+                sh '''
+                # Stop and remove the old container (if it exists)
+                docker stop helloworldcontainer || true
+                docker rm helloworldcontainer || true
+                # run the new container
+                docker run -d --name helloworldcontainer -p 8060:8080 amitkumar0441/docker-helloworld:${BUILD_NUMBER}'''
             }
         }
     }
 }
+
+
